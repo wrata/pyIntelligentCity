@@ -156,7 +156,7 @@ class pyIntelligentCity(object):
         return p  # zwraca 4 - urządzenia nie podłączono    
 
     def SD_red_on(self):
-        ''' Sygnalizator drogowy - włączenie czerwonego światła '''
+        ''' Sygnalizator drogowy - włączenie wszystkich świateł '''
         p = 0    
         while p < 4:
             if  self.Devices[p] == 6: # sygnalizator drogowy
