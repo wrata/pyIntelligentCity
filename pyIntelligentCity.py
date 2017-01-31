@@ -49,7 +49,7 @@ class pyIntelligentCity(object):
         self.Devices = None
         self.DevicesNames = None
         self.DefDevicesNames = [     
-            'Nieznany element',
+            'Nieznany element albo pusty port',
             'Lampa uliczna',
             'Czujnik przejazdu',
             'Zapora kolejowa',
@@ -78,7 +78,7 @@ class pyIntelligentCity(object):
             for x in [0, 1, 2, 3]:
                 self.board.analog[x].enable_reporting()
             # ustawiamy wszystkie podłączone urządzenia 
-            print('Done OK - connecting Arduino with IntelligentCity at COM Port: ' + self.ComPort) # Tu brakowało self.!
+            print('Done OK - connecting Arduino with IntelligentCity at COM Port: ' + self.ComPort) 
             return True
         except:
             print('City not found')
@@ -136,6 +136,7 @@ class pyIntelligentCity(object):
             return False
         else:
             print('There is city connected at port: '+ self.ComPort)
+            print u'Wykryte elementy Inteligentnego Miasta:'
             for port in [0, 1, 2, 3]:
                 print (port, self.Devices[port], self.DevicesNames[port])
             return True
@@ -144,7 +145,7 @@ class pyIntelligentCity(object):
     # Sterowanie sygnalizatorem drogowym SD #
 
     def SD_all_off(self):
-        ''' Sygnalizator drogowy - wyłączenie czerwonego światła '''
+        ''' Sygnalizator drogowy - wyłączenie wszystkich świateł '''
         p = 0    
         while p < 4:
             if  self.Devices[p] == 6: # sygnalizator drogowy
@@ -156,7 +157,7 @@ class pyIntelligentCity(object):
         return p  # zwraca 4 - urządzenia nie podłączono    
 
     def SD_red_on(self):
-        ''' Sygnalizator drogowy - włączenie wszystkich świateł '''
+        ''' Sygnalizator drogowy - włączenie czerwonego światła '''
         p = 0    
         while p < 4:
             if  self.Devices[p] == 6: # sygnalizator drogowy
