@@ -142,6 +142,56 @@ class pyIntelligentCity(object):
             return True
 
     ###################################
+    # Sterowanie latarnią uliczną                            #
+    
+    def lamp_off(self):
+        ''' Latarnia uliczna - wyłączenie latarni '''
+        p = 0    
+        while p < 4:
+            if  self.Devices[p] == 1: # latarnia uliczna
+                self.board.digital[p*3+2].write(0)
+                self.board.digital[p*3+3].write(0)
+                return p   # zwraca numer portu 0, 1, 2 lub 3          
+            p += 1
+        return p  # zwraca 4 - urządzenia nie podłączono
+    
+    def lamp_on(self):
+        ''' Latarnia uliczna - włączenie latarni z pełną mocą '''
+        p = 0    
+        while p < 4:
+            if  self.Devices[p] == 1: # latarnia uliczna
+                self.board.digital[p*3+2].write(1)
+                self.board.digital[p*3+3].write(1)
+                return p   # zwraca numer portu 0, 1, 2 lub 3          
+            p += 1
+        return p  # zwraca 4 - urządzenia nie podłączono
+
+    def lamp_eco_on(self):
+        ''' Latarnia uliczna - włączenie latarni w trybie ekonomicznym '''
+        p = 0    
+        while p < 4:
+            if  self.Devices[p] == 1: # latarnia uliczna
+                self.board.digital[p*3+2].write(1)
+                self.board.digital[p*3+3].write(0)
+                return p   # zwraca numer portu 0, 1, 2 lub 3          
+            p += 1
+        return p  # zwraca 4 - urządzenia nie podłączono
+
+    def isDark(self):
+        ''' Latarnia uliczna - pomiar natężenia światła w otoczeniu '''
+        p = 0    
+        while p < 4:
+            if  self.Devices[p] == 1:
+                a = int(self.board.analog[p].read() * 1023)
+                if a < 105: # można ustalić inny poziom
+                    return True   # ciemno
+                else:
+                    return False # jasno
+            p += 1
+        return False # lampa nie jest podłączona do sterownika
+            
+    
+    ###################################    
     # Sterowanie sygnalizatorem drogowym SD #
 
     def SD_all_off(self):
