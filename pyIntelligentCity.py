@@ -57,8 +57,7 @@ class pyIntelligentCity(object):
             'Sygnalizator dla pieszych',
             'Sygnalizator drogowy'
         ]
-        
-        
+                
         # test
         self.IsCity = self.arduino_detect()
         self.device_detect()
