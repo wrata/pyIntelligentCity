@@ -33,14 +33,14 @@ import sys
 
 class pyIntelligentCity(object):
     '''
-    Klasa pyIntelligentCity - obsługa Inteligentnego Miasta
+    Klasa pyIntelligentCity - obsługa zestawu edukacyjnego Inteligentne Miasto
     '''
       
     def __init__(self,ComPort):
         '''
         comPort: '/dev/ttyUSB0' for Linux, 'COM1' for Windows
         sys.platform - oddaje system
-        Weryfikujemy, co jest podłączone, ustawiamy słownik Devices
+        Weryfikujemy, co jest podłączone i budujemy słownik Devices
         '''
         self.ComPort = ComPort
         self.IsCity = False
@@ -115,21 +115,21 @@ class pyIntelligentCity(object):
                 device_type.append(0)
         # po przejściu wszystkich 4 portów zapisujemy słownik definiujący typy oraz opisy urządzeń
         self.Devices = {
-                                 0 : device_type[0],
-                                 1 : device_type[1],
-                                 2 : device_type[2],
-                                 3 : device_type[3]
-                                 }
+                        0 : device_type[0],
+                        1 : device_type[1],
+                        2 : device_type[2],
+                        3 : device_type[3]
+                       }
         self.DevicesNames = {
-                                             0: self.DefDevicesNames[device_type[0]],
-                                             1: self.DefDevicesNames[device_type[1]],
-                                             2: self.DefDevicesNames[device_type[2]],
-                                             3: self.DefDevicesNames[device_type[3]]
-                                             }   
+                             0: self.DefDevicesNames[device_type[0]],
+                             1: self.DefDevicesNames[device_type[1]],
+                             2: self.DefDevicesNames[device_type[2]],
+                             3: self.DefDevicesNames[device_type[3]]
+                            }   
            
     def info(self):
         '''
-        Wypisujemy wszystkie informacje o podłączonym mieście, o ile w ogóle jest
+        Wypisujemy wszystkie informacje o podłączonym mieście
         '''
         if not self.IsCity:
             print('There is NO City connected. Bye bye ...')
@@ -141,8 +141,8 @@ class pyIntelligentCity(object):
                 print (port, self.Devices[port], self.DevicesNames[port])
             return True
 
-    ###################################
-    # Sterowanie latarnią uliczną                            #
+    ################################
+    # Sterowanie latarnią uliczną  #
     
     def lamp_off(self):
         ''' Latarnia uliczna - wyłączenie latarni '''
@@ -191,7 +191,7 @@ class pyIntelligentCity(object):
         return False # lampa nie jest podłączona do sterownika
             
     
-    ###################################    
+    #########################################    
     # Sterowanie sygnalizatorem drogowym SD #
 
     def SD_all_off(self):
